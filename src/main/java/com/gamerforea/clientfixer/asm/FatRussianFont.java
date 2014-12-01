@@ -51,7 +51,8 @@ public class FatRussianFont implements Opcodes
 			if (mNode.name.equals(renderCharAtPos) && mNode.desc.equals("(ICZ)F")) replaceFontRendererSymbols(mNode);
 			else if (mNode.name.equals(renderStringAtPos) && mNode.desc.equals("(Ljava/lang/String;Z)V")) replaceFontRendererSymbols(mNode);
 			else if (mNode.name.equals(getCharWidth) && mNode.desc.equals("(C)I")) replaceFontRendererSymbols(mNode);
-			else if (mNode.name.equals("getCharWidthFloat") && mNode.desc.equals("(C)F")) replaceFontRendererSymbols(mNode); // OptiFine support.
+			else if (mNode.name.equals("getCharWidthFloat") && mNode.desc.equals("(C)F")) replaceFontRendererSymbols(mNode); // OptiFine
+																																// support.
 		}
 
 		ClassWriter cWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS);
@@ -78,7 +79,7 @@ public class FatRussianFont implements Opcodes
 		return cWriter.toByteArray();
 	}
 
-	//============================================================================================================================
+	// ============================================================================================================================
 
 	private static InsnList getLocaleInsnList()
 	{

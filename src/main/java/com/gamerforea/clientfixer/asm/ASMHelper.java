@@ -1,45 +1,32 @@
 package com.gamerforea.clientfixer.asm;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.gamerforea.clientfixer.loader.CoreMod;
+import com.google.common.collect.ImmutableMap;
 
-public class ASMHelper
+public final class ASMHelper
 {
-	public static Map<String, String> fieldMap = new HashMap<String, String>();
-	public static Map<String, String> methodMap = new HashMap<String, String>();
+	private static final ImmutableMap<String, String> fields;
+	private static final ImmutableMap<String, String> methods;
 
 	static
 	{
-		methodMap.put("net.minecraft.client.resources.Locale.isUnicode", "func_135025_a");
-		methodMap.put("net.minecraft.client.Minecraft.getMinecraft", "func_71410_x");
-		methodMap.put("net.minecraft.client.gui.FontRenderer.renderCharAtPos", "func_78278_a");
-		methodMap.put("net.minecraft.client.gui.FontRenderer.renderStringAtPos", "func_78255_a");
-		methodMap.put("net.minecraft.client.gui.FontRenderer.getCharWidth", "func_78263_a");
-		methodMap.put("net.minecraft.client.Minecraft.startGame", "func_71384_a");
-		fieldMap.put("net.minecraft.client.Minecraft.gameSettings", "field_71474_y");
-		fieldMap.put("net.minecraft.client.settings.GameSettings.language", "field_74363_ab");
-		fieldMap.put("net.minecraft.client.settings.GameSettings.forceUnicodeFont", "field_151455_aw");
+		ImmutableMap.Builder<String, String> builderFields = ImmutableMap.builder();
+		builderFields.put("net.minecraft.client.resources.Locale.unicode", "field_135029_d");
+		fields = builderFields.build();
+
+		ImmutableMap.Builder<String, String> builderMethods = ImmutableMap.builder();
+		builderMethods.put("net.minecraft.client.resources.Locale.isUnicode", "func_135025_a");
+		builderMethods.put("net.minecraft.client.Minecraft.startGame", "func_71384_a");
+		methods = builderMethods.build();
 	}
 
 	public static String getField(String field)
 	{
-		if (!CoreMod.isObfuscated)
-		{
-			return field.substring(field.lastIndexOf(".") + 1);
-		}
-
-		return fieldMap.get(field);
+		return CoreMod.isObfuscated ? fields.get(field) : field.substring(field.lastIndexOf('.') + 1);
 	}
 
 	public static String getMethod(String method)
 	{
-		if (!CoreMod.isObfuscated)
-		{
-			return method.substring(method.lastIndexOf(".") + 1);
-		}
-
-		return methodMap.get(method);
+		return CoreMod.isObfuscated ? methods.get(method) : method.substring(method.lastIndexOf('.') + 1);
 	}
 }

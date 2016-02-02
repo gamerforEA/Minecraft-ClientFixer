@@ -3,15 +3,16 @@ package com.gamerforea.clientfixer.loader;
 import static com.gamerforea.clientfixer.loader.CoreMod.MODID;
 import static com.gamerforea.clientfixer.loader.CoreMod.NAME;
 import static com.gamerforea.clientfixer.loader.CoreMod.VERSION;
+
+import com.google.common.eventbus.EventBus;
+
 import net.minecraftforge.fml.common.DummyModContainer;
 import net.minecraftforge.fml.common.LoadController;
 import net.minecraftforge.fml.common.ModMetadata;
 
-import com.google.common.eventbus.EventBus;
-
-public class ModContainer extends DummyModContainer
+public final class ModContainer extends DummyModContainer
 {
-	private ModMetadata meta = new ModMetadata();
+	private final ModMetadata meta = new ModMetadata();
 
 	public ModContainer()
 	{
@@ -21,6 +22,7 @@ public class ModContainer extends DummyModContainer
 		this.meta.modId = this.getModId();
 		this.meta.name = this.getName();
 		this.meta.version = this.getVersion();
+		this.meta.url = "https://github.com/gamerforEA/Minecraft-ClientFixer";
 	}
 
 	@Override

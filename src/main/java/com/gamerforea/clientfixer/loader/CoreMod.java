@@ -6,7 +6,7 @@ import java.util.Map;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 
-@IFMLLoadingPlugin.MCVersion("1.10.2")
+@IFMLLoadingPlugin.MCVersion("1.11")
 @IFMLLoadingPlugin.Name(CoreMod.NAME)
 @IFMLLoadingPlugin.SortingIndex(1001)
 public final class CoreMod implements IFMLLoadingPlugin

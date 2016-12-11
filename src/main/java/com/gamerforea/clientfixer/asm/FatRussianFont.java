@@ -106,7 +106,7 @@ public final class FatRussianFont implements Opcodes
 	public static boolean isUnicode(boolean unicode)
 	{
 		GameSettings settings = Minecraft.getMinecraft().gameSettings;
-		if (!settings.forceUnicodeFont && settings.language.equals("ru_RU"))
+		if (!settings.forceUnicodeFont && settings.language.equalsIgnoreCase("ru_ru"))
 			return false;
 		else
 			return unicode;

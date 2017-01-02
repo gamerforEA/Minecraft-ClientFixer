@@ -17,12 +17,14 @@ public final class CoreMod implements IFMLLoadingPlugin
 
 	public static boolean isObfuscated = false;
 	public static boolean patchFatRussianFont = false;
+	public static float fontShadow = 1.0F;
 
 	public CoreMod()
 	{
 		Configuration config = new Configuration(new File("config", NAME + ".cfg"));
 		config.load();
 		patchFatRussianFont = config.getBoolean("FatRussianFont", "tweaks", true, "Включить поддержку толстых русских шрифтов. Файл шрифтов - ascii_fat.png");
+		fontShadow = config.getFloat("FontShadow", "tweaks", 1.0F, 0.0F, 2.0F, "Размер тени в шрифте");
 		config.save();
 	}
 

@@ -14,7 +14,7 @@ public final class ASMTransformer implements IClassTransformer
 			if (transformedName.equals("net.minecraft.client.resources.Locale"))
 				return FatRussianFont.patchLocale(basicClass);
 			if (transformedName.equals("net.minecraft.client.gui.FontRenderer"))
-				return FatRussianFont.patchFontRenderer(basicClass);
+				return FatRussianFont.patchFontRenderer(basicClass, CoreMod.fontShadow);
 			if (transformedName.equals("net.minecraft.client.Minecraft"))
 				return FatRussianFont.patchMinecraft(basicClass);
 		}

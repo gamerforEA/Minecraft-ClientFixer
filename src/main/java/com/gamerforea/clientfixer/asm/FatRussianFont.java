@@ -111,8 +111,18 @@ public final class FatRussianFont implements Opcodes
 		while (iterator.hasNext())
 		{
 			AbstractInsnNode insn = iterator.next();
-			if(insn.getOpcode() == FCONST_1) {
-				iterator.set(new LdcInsnNode(fontShadow));
+			if(insn.getOpcode() == FLOAD && insn instanceof VarInsnNode) {
+				VarInsnNode fload = (VarInsnNode) insn;
+				if(fload.var == 2 || fload.var == 3) {
+					AbstractInsnNode maybe_fconst = iterator.next();
+					if(maybe_fconst.getOpcode() == FCONST_1) {
+						AbstractInsnNode maybe_fadd = iterator.next();
+						if(maybe_fadd.getOpcode() == FADD) {
+							iterator.previous();
+							iterator.set(new LdcInsnNode(fontShadow));
+						}
+					}
+				}
 			}
 		}
 	}

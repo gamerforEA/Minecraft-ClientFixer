@@ -15,7 +15,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
-version = "1.4"
+version = "1.4.1"
 group= "com.gamerforea"
 archivesBaseName = "ClientFixer"
 

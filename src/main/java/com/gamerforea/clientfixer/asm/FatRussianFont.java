@@ -43,13 +43,18 @@ public final class FatRussianFont implements Opcodes
 		return cWriter.toByteArray();
 	}
 
-	public static byte[] patchFontRenderer(byte[] basicClass) // net.minecraft.client.gui.FontRenderer
+	public static byte[] patchFontRenderer(byte[] basicClass, float fontShadow) // net.minecraft.client.gui.FontRenderer
 	{
 		ClassNode cNode = new ClassNode();
 		new ClassReader(basicClass).accept(cNode, 0);
+		String drawString = ASMHelper.getMethod("net.minecraft.client.gui.FontRenderer.drawString");
 
-		for (MethodNode mNode : cNode.methods)
+		for (MethodNode mNode : cNode.methods) {
 			replaceLdc(mNode, ASCII, ASCII_RUS);
+			if (mNode.name.equals(drawString) && mNode.desc.equals("(Ljava/lang/String;FFIZ)I")) {
+				replaceFconst(mNode, fontShadow);
+			}
+		}
 
 		ClassWriter cWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 		cNode.accept(cWriter);
@@ -98,6 +103,27 @@ public final class FatRussianFont implements Opcodes
 			Object cst = insn instanceof LdcInsnNode ? ((LdcInsnNode) insn).cst : null;
 			if (cst != null && cst.equals(from))
 				iterator.set(new LdcInsnNode(to));
+		}
+	}
+
+	private static void replaceFconst(MethodNode mNode, float fontShadow) {
+		ListIterator<AbstractInsnNode> iterator = mNode.instructions.iterator();
+		while (iterator.hasNext())
+		{
+			AbstractInsnNode insn = iterator.next();
+			if(insn.getOpcode() == FLOAD && insn instanceof VarInsnNode) {
+				VarInsnNode fload = (VarInsnNode) insn;
+				if(fload.var == 2 || fload.var == 3) {
+					AbstractInsnNode maybe_fconst = iterator.next();
+					if(maybe_fconst.getOpcode() == FCONST_1) {
+						AbstractInsnNode maybe_fadd = iterator.next();
+						if(maybe_fadd.getOpcode() == FADD) {
+							iterator.previous();
+							iterator.set(new LdcInsnNode(fontShadow));
+						}
+					}
+				}
+			}
 		}
 	}
 

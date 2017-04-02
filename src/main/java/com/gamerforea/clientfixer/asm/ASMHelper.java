@@ -16,7 +16,7 @@ public final class ASMHelper
 
 		ImmutableMap.Builder<String, String> builderMethods = ImmutableMap.builder();
 		builderMethods.put("net.minecraft.client.resources.Locale.isUnicode", "func_135025_a");
-		builderMethods.put("net.minecraft.client.Minecraft.startGame", "func_71384_a");
+		builderMethods.put("net.minecraft.client.Minecraft.init", "func_71384_a");
 		methods = builderMethods.build();
 	}
 

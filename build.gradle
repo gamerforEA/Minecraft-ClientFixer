@@ -1,28 +1,24 @@
 buildscript {
 	repositories {
 		jcenter()
-		maven {
-			name = "forge"
-			url = "http://files.minecraftforge.net/maven"
-		}
+		maven { url = "http://files.minecraftforge.net/maven" }
 	}
 	dependencies {
 		classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
 	}
 }
-
 apply plugin: 'net.minecraftforge.gradle.forge'
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
-version = "1.5"
+version = "1.11.2-1.6"
 group= "com.gamerforea"
 archivesBaseName = "ClientFixer"
 
 minecraft {
-	version = "1.11-13.19.1.2189"
+	version = "1.11.2-13.20.0.2255"
 	runDir = "run"
-	mappings = "snapshot_20161111"
+	mappings = "snapshot_20161220"
 	replace "@VERSION@", project.version
 }
 

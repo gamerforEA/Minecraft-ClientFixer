@@ -60,7 +60,7 @@ public final class FatRussianFont implements Opcodes
 	{
 		ClassNode cNode = new ClassNode();
 		new ClassReader(basicClass).accept(cNode, 0);
-		String startGame = ASMHelper.getMethod("net.minecraft.client.Minecraft.startGame");
+		String startGame = ASMHelper.getMethod("net.minecraft.client.Minecraft.init");
 
 		for (MethodNode mNode : cNode.methods)
 			if (mNode.name.equals(startGame) && mNode.desc.equals("()V"))

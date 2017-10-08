@@ -1,22 +1,13 @@
 package com.gamerforea.clientfixer.asm;
 
-import java.util.ListIterator;
-
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.settings.GameSettings;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.tree.AbstractInsnNode;
-import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.FieldInsnNode;
-import org.objectweb.asm.tree.InsnList;
-import org.objectweb.asm.tree.InsnNode;
-import org.objectweb.asm.tree.LdcInsnNode;
-import org.objectweb.asm.tree.MethodInsnNode;
-import org.objectweb.asm.tree.MethodNode;
-import org.objectweb.asm.tree.VarInsnNode;
+import org.objectweb.asm.tree.*;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.settings.GameSettings;
+import java.util.ListIterator;
 
 public final class FatRussianFont implements Opcodes
 {
@@ -32,11 +23,13 @@ public final class FatRussianFont implements Opcodes
 
 		String isUnicode = ASMHelper.getMethod("net.minecraft.client.resources.Locale.isUnicode");
 		for (MethodNode mNode : cNode.methods)
+		{
 			if (mNode.name.equals(isUnicode) && mNode.desc.equals("()Z"))
 			{
 				mNode.instructions = getLocaleInsnList();
 				break;
 			}
+		}
 
 		ClassWriter cWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 		cNode.accept(cWriter);
@@ -49,7 +42,9 @@ public final class FatRussianFont implements Opcodes
 		new ClassReader(basicClass).accept(cNode, 0);
 
 		for (MethodNode mNode : cNode.methods)
+		{
 			replaceLdc(mNode, ASCII, ASCII_RUS);
+		}
 
 		ClassWriter cWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 		cNode.accept(cWriter);
@@ -63,11 +58,13 @@ public final class FatRussianFont implements Opcodes
 		String startGame = ASMHelper.getMethod("net.minecraft.client.Minecraft.init");
 
 		for (MethodNode mNode : cNode.methods)
+		{
 			if (mNode.name.equals(startGame) && mNode.desc.equals("()V"))
 			{
 				replaceLdc(mNode, ASCII_PATH, ASCII_PATH_RUS);
 				break;
 			}
+		}
 
 		ClassWriter cWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 		cNode.accept(cWriter);

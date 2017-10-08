@@ -1,14 +1,11 @@
 package com.gamerforea.clientfixer.loader;
 
-import static com.gamerforea.clientfixer.loader.CoreMod.MODID;
-import static com.gamerforea.clientfixer.loader.CoreMod.NAME;
-import static com.gamerforea.clientfixer.loader.CoreMod.VERSION;
-
 import com.google.common.eventbus.EventBus;
-
 import net.minecraftforge.fml.common.DummyModContainer;
 import net.minecraftforge.fml.common.LoadController;
 import net.minecraftforge.fml.common.ModMetadata;
+
+import static com.gamerforea.clientfixer.loader.CoreMod.*;
 
 public final class ModContainer extends DummyModContainer
 {

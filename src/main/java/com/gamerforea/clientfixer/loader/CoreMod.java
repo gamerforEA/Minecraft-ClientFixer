@@ -1,12 +1,12 @@
 package com.gamerforea.clientfixer.loader;
 
-import java.io.File;
-import java.util.Map;
-
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 
-@IFMLLoadingPlugin.MCVersion("1.12.1")
+import java.io.File;
+import java.util.Map;
+
+@IFMLLoadingPlugin.MCVersion("1.12.2")
 @IFMLLoadingPlugin.Name(CoreMod.NAME)
 @IFMLLoadingPlugin.SortingIndex(1001)
 public final class CoreMod implements IFMLLoadingPlugin

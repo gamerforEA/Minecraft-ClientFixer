@@ -1,7 +1,6 @@
 package com.gamerforea.clientfixer.asm;
 
 import com.gamerforea.clientfixer.loader.CoreMod;
-
 import net.minecraft.launchwrapper.IClassTransformer;
 
 public final class ASMTransformer implements IClassTransformer
